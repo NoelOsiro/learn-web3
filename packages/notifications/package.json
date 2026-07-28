@@ -1,0 +1,20 @@
+{
+  "name": "@cashflow/notifications",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist node_modules"
+  },
+  "dependencies": {
+    "@cashflow/database": "*",
+    "@cashflow/shared": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "exports": { ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" } }
+}

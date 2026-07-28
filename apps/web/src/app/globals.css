@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+  --background: 142 35% 97%;
+  --foreground: 152 35% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 152 35% 10%;
+
+  --primary: 142 70% 35%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 142 40% 94%;
+  --secondary-foreground: 152 35% 15%;
+
+  --accent: 38 95% 55%;
+  --accent-foreground: 35 45% 10%;
+
+  --muted: 142 30% 94%;
+  --muted-foreground: 152 20% 40%;
+
+  --border: 142 25% 88%;
+  --input: 142 25% 88%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 152 35% 10%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  
+  /* Vibrant Agritech Colors */
+  --agri-leaf: 142 70% 35%;
+  --agri-lime: 88 75% 50%;
+  --agri-harvest: 38 95% 55%;
+  --agri-soil: 28 45% 35%;
+  --agri-sky: 199 85% 48%;
+  --agri-sprout: 95 65% 45%;
+  --agri-forest: 152 60% 25%;
+  --agri-gold: 45 90% 52%;
+
+  --ring: 142 70% 40%;
+}
+
+  .dark {
+    --background: 152 25% 8%;
+    --foreground: 142 30% 96%;
+    --card: 152 20% 12%;
+    --card-foreground: 142 30% 96%;
+    --popover: 152 20% 12%;
+    --popover-foreground: 142 30% 96%;
+    --primary: 142 65% 50%;
+    --primary-foreground: 152 25% 8%;
+    --secondary: 152 25% 18%;
+    --secondary-foreground: 142 30% 96%;
+    --muted: 152 20% 17%;
+    --muted-foreground: 142 15% 65%;
+    --accent: 40 92% 58%;
+    --accent-foreground: 35 35% 12%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 152 20% 23%;
+    --input: 152 20% 23%;
+    --ring: 142 65% 55%;
+    
+    /* Vibrant Agritech Colors - Dark Mode */
+    --agri-leaf: 142 65% 50%;
+    --agri-lime: 88 70% 55%;
+    --agri-harvest: 40 92% 58%;
+    --agri-soil: 30 40% 45%;
+    --agri-sky: 199 80% 58%;
+    --agri-sprout: 95 60% 50%;
+    --agri-forest: 152 55% 30%;
+    --agri-gold: 45 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  .dashboard-page {
+    @apply mx-auto max-w-screen-2xl space-y-8;
+  }
+
+  .data-table th {
+    @apply bg-muted/50 text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground;
+  }
+}
+
+/* The intake ledger uses commodity-specific inline tokens; preserve those accents
+   while remapping its neutral surfaces when the workspace is in dark mode. */
+.dark [style*="#FFFFFF"] { background-color: hsl(var(--card)) !important; }
+.dark [style*="#F5F2EB"] { background-color: hsl(var(--muted)) !important; }
+.dark [style*="#D4DDD5"], .dark [style*="#EAE8E2"] { border-color: hsl(var(--border)) !important; }
+.dark [style*="#1A2B1E"] { color: hsl(var(--foreground)) !important; }
+.dark [style*="#5A6E5E"], .dark [style*="#7A8C7D"], .dark [style*="#9AADA0"] { color: hsl(var(--muted-foreground)) !important; }

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "turbo run build",
+  "installCommand": "npm install",
+  "framework": null,
+  "devCommand": "turbo run dev",
+  "regions": ["iad1"],
+  "env": {
+    "DATABASE_URL": {
+      "description": "PostgreSQL connection string from Supabase"
+    },
+    "NEXT_PUBLIC_SUPABASE_URL": {
+      "description": "Supabase project URL"
+    },
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": {
+      "description": "Supabase anonymous key"
+    },
+    "SUPABASE_SERVICE_ROLE_KEY": {
+      "description": "Supabase service role key"
+    },
+    "INNGEST_EVENT_KEY": {
+      "description": "Inngest event key"
+    },
+    "INNGEST_SIGNING_KEY": {
+      "description": "Inngest signing key"
+    }
+  }
+}
