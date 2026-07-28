@@ -63,7 +63,34 @@ export async function listCreditFacilities(
   const [data, total] = await prisma.$transaction([
     prisma.credit.findMany({
       where,
-      include: { farmer: true, collection: true, valuation: true, repayments: { where: { deletedAt: null } } },
+      include: {
+        farmer: {
+          select: {
+            id: true,
+            name: true,
+            code: true,
+          },
+        },
+        collection: {
+          select: {
+            id: true,
+            netAmount: true,
+          },
+        },
+        valuation: {
+          select: {
+            id: true,
+            netAmount: true,
+          },
+        },
+        repayments: {
+          where: { deletedAt: null },
+          select: {
+            id: true,
+            amount: true,
+          },
+        },
+      },
       orderBy: { createdAt: 'desc' },
       skip: (page - 1) * limit,
       take: limit,

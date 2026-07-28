@@ -1,7 +1,6 @@
 'use client';
 
 // app/dashboard/loans/page.tsx
-import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   Plus,
@@ -62,10 +61,9 @@ export default function LoansPage() {
     const outstandingBalance = Math.max(0, principal - totalRepaid);
 
     // Dynamic Collateral Coverage calculation: Valuation/Collection value vs Loan Principal
-    const collateralValue =
-      Number(credit.valuation?.netAmount ??
-      credit.collection?.netAmount ??
-      0);
+    const collateralValue = Number(
+      credit.valuation?.netAmount ?? credit.collection?.netAmount ?? 0
+    );
 
     const collateralCoverage =
       principal > 0 ? Math.round((collateralValue / principal) * 100) : 0;
