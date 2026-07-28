@@ -69,7 +69,7 @@ export default async function FarmersPage({ searchParams }: PageProps) {
   const verifiedCount = farmers.filter((f) => f.kycStatus === 'VERIFIED').length;
   const kycRatio = totalFarmers > 0 ? ((verifiedCount / totalFarmers) * 100).toFixed(1) : '0';
   const activeBorrowersCount = farmers.filter((f) => f.activeLoan > 0).length;
-  const totalLoanExposure = farmers.reduce((acc, f) => acc + f.activeLoan, 0);
+  const totalLoanExposure = farmers.reduce((acc: number, f: { activeLoan: number }) => acc + f.activeLoan, 0);
 
   const kpis = [
     {

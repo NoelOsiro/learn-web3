@@ -40,7 +40,7 @@ export default async function CollectionsPage({ searchParams }: PageProps) {
     ...(user.role === 'VIEWER' ? { viewerEmail: user.email, viewerPhone: user.phone } : {}),
   });
 
-  const collections: Collection[] = rawCollections.map((item) => ({
+  const collections: Collection[] = rawCollections.map((item: any) => ({
     id: item.id,
     tenantId: item.tenantId,
     farmerId: item.farmerId,
