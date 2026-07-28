@@ -9,6 +9,7 @@ import {
   TransactionType,
   ReferenceType,
   EntryDirection,
+  UserRole
 } from '@prisma/client';
 
 const globalForPrisma = globalThis as unknown as {
@@ -36,4 +37,5 @@ export {
   TransactionType,
   ReferenceType,
   EntryDirection,
+  UserRole
 };
