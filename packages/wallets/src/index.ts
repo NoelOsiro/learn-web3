@@ -53,17 +53,8 @@ export async function listWallets(
   const { page, limit } = paginationSchema.parse(input);
   
   const search = input.search?.trim();
-  const status = input.status?.toUpperCase();
 
    // Handle derived status mapping
-  let statusWhere: Prisma.FarmerWhereInput = {};
-  if (status === 'SUSPENDED') {
-    statusWhere = { isActive: false };
-  } else if (status === 'PENDING') {
-    statusWhere = { isActive: true, idNumber: null };
-  } else if (status === 'VERIFIED') {
-    statusWhere = { isActive: true, idNumber: { not: null } };
-  }
 
   const where: Prisma.WalletWhereInput = {
     tenantId,
