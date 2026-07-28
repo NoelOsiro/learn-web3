@@ -21,8 +21,10 @@ export function CollectionLogModal({ isOpen, onClose, onSuccess }: CollectionLog
   const [formError, setFormError] = useState<string | null>(null);
 
   // tRPC Queries
-  const { data: farmers } = trpc.farmerOps.list.useQuery(undefined, { enabled: isOpen });
+  const { data: farmersData } = trpc.farmerOps.list.useQuery({}, { enabled: isOpen });
   const { data: priceBooks } = trpc.priceBooks.active.useQuery(undefined, { enabled: isOpen });
+
+  const farmers = farmersData?.data || [];
 
   // Single Form State
   const [singleForm, setSingleForm] = useState({
