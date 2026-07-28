@@ -1,5 +1,4 @@
 import {
-  Wallet,
   ArrowUpRight,
   ArrowDownLeft,
   Phone,
