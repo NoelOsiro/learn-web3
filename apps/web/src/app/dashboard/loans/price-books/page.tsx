@@ -66,11 +66,11 @@ export default function PriceBooksPage() {
   const totalLines = rawPriceBooks.reduce((acc, pb) => acc + pb.lines.length, 0);
 
   // Average price per unit across all lines
-  const allPrices = rawPriceBooks.flatMap((pb) => 
-    pb.lines.map((line) => Number(line.pricePerUnit))
+  const allPrices = rawPriceBooks.flatMap((pb) =>
+    pb.lines.map((line: { pricePerUnit: string }) => Number(line.pricePerUnit))
   );
-  const avgPrice = allPrices.length > 0 
-    ? allPrices.reduce((acc, price) => acc + price, 0) / allPrices.length 
+  const avgPrice = allPrices.length > 0
+    ? allPrices.reduce((acc: number, price: number) => acc + price, 0) / allPrices.length
     : 0;
 
   // Count by commodity
