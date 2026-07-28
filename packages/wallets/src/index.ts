@@ -1,9 +1,10 @@
 import { EntryDirection, Prisma, prisma, ReferenceType, TransactionType, WalletType } from '@cashflow/database';
+import { Decimal } from '@prisma/client/runtime/library';
 import { decimalSchema, paginationSchema, uuidSchema } from '@cashflow/shared';
 import { z } from 'zod';
 
 export const transferFundsSchema = z.object({
-  tenantId: uuidSchema, debitWalletId: uuidSchema, creditWalletId: uuidSchema, amount: decimalSchema.refine((amount) => new Prisma.Decimal(amount).greaterThan(0), 'Amount must be greater than zero'),
+  tenantId: uuidSchema, debitWalletId: uuidSchema, creditWalletId: uuidSchema, amount: decimalSchema.refine((amount) => new Decimal(amount).greaterThan(0), 'Amount must be greater than zero'),
   type: z.nativeEnum(TransactionType), referenceType: z.nativeEnum(ReferenceType).optional(), referenceId: uuidSchema.optional(), description: z.string().trim().max(500).optional(),
 });
 export type TransferFundsInput = z.input<typeof transferFundsSchema>;
@@ -16,7 +17,7 @@ export async function getOrCreateFarmerWallet(tenantId: string, farmerId: string
 
 export async function transferFunds(input: TransferFundsInput) {
   const data = transferFundsSchema.parse(input);
-  return prisma.$transaction(async (tx) => {
+  return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     const wallets = await tx.wallet.findMany({ where: { id: { in: [data.debitWalletId, data.creditWalletId] }, tenantId: data.tenantId, deletedAt: null } });
     const debitWallet = wallets.find((wallet) => wallet.id === data.debitWalletId);
     const creditWallet = wallets.find((wallet) => wallet.id === data.creditWalletId);

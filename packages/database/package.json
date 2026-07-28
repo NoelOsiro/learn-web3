@@ -5,10 +5,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run db:generate && tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist node_modules",
     "db:generate": "prisma generate --schema=./prisma/schema.prisma",
+    "build": "npm run db:generate && tsc",
     "db:push": "dotenv -e ../../.env -- prisma db push --schema=./prisma/schema.prisma",
     "db:pull": "dotenv -e ../../.env -- prisma db pull --schema=./prisma/schema.prisma",
     "db:migrate": "prisma migrate dev --schema=./prisma/schema.prisma",
