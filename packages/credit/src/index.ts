@@ -1,11 +1,12 @@
 import { CreditStatus, Prisma, prisma, CommodityType } from '@cashflow/database';
+import { Decimal } from '@prisma/client/runtime/library';
 import { decimalSchema, paginationSchema, uuidSchema } from '@cashflow/shared';
 import { transferFunds } from '@cashflow/wallets';
 import { z } from 'zod';
 
 export const createCreditSchema = z.object({
   tenantId: uuidSchema, farmerId: uuidSchema, providerId: uuidSchema.optional(), collectionId: uuidSchema.optional(), valuationId: uuidSchema.optional(),
-  amount: decimalSchema.refine((amount) => new Prisma.Decimal(amount).greaterThan(0)), interestRate: decimalSchema, termMonths: z.coerce.number().int().positive().max(120), startDate: z.coerce.date(), endDate: z.coerce.date(), purpose: z.string().trim().max(500).optional(), notes: z.string().trim().max(1000).optional(),
+  amount: decimalSchema.refine((amount) => new Decimal(amount).greaterThan(0)), interestRate: decimalSchema, termMonths: z.coerce.number().int().positive().max(120), startDate: z.coerce.date(), endDate: z.coerce.date(), purpose: z.string().trim().max(500).optional(), notes: z.string().trim().max(1000).optional(),
 });
 export type CreateCreditInput = z.input<typeof createCreditSchema>;
 
@@ -217,7 +218,7 @@ export async function getPriceBookById(tenantId: string, id: string) {
 }
 
 export async function createPriceBook(input: CreatePriceBookInput) {
-  const data = createPriceBookSchema.parse(input);
+  const data: z.infer<typeof createPriceBookSchema> = createPriceBookSchema.parse(input);
   if (data.validTo && data.validTo <= data.validFrom) throw new Error('Valid to date must be after valid from date');
 
   // If setting as default, unset other defaults for this commodity
@@ -245,7 +246,7 @@ export async function createPriceBook(input: CreatePriceBookInput) {
         create: data.lines.map((line) => ({
           grade: line.grade as any,
           unit: line.unit as any,
-          pricePerUnit: new Prisma.Decimal(line.pricePerUnit),
+          pricePerUnit: new Decimal(line.pricePerUnit),
           currency: line.currency,
         })),
       },
@@ -298,7 +299,7 @@ export async function updatePriceBook(
     });
   }
 
-  return prisma.$transaction(async (tx) => {
+  return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // Delete existing lines if provided
     if (input.lines) {
       await tx.priceBookLine.deleteMany({
@@ -319,7 +320,7 @@ export async function updatePriceBook(
             create: input.lines.map((line) => ({
               grade: line.grade as any,
               unit: line.unit as any,
-              pricePerUnit: new Prisma.Decimal(line.pricePerUnit),
+              pricePerUnit: new Decimal(line.pricePerUnit),
               currency: line.currency,
             })),
           },
