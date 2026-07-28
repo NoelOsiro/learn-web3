@@ -12,10 +12,10 @@ import {
   MoreVertical,
   KeyRound,
 } from 'lucide-react';
-import { PageHeader } from '@/components/dashboard/PageHeadr';
-import KPI from '@/components/dashboard/kpi';
+
 import { DataTableFilterBar } from '@/components/tables/data-table-filter-bar';
 import { FilterSelect } from '@/components/tables/filter-select';
+import { KPI, PageHeader } from '@cashflow/ui';
 
 interface SystemUser {
   id: string;
