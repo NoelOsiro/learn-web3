@@ -53,7 +53,7 @@ export default function LoansPage() {
 
     // Sum all processed repayments
     const totalRepaid = credit.repayments.reduce(
-      (acc, r) => acc + Number(r.amount),
+      (acc: number, r: { amount: string }) => acc + Number(r.amount),
       0
     );
 
