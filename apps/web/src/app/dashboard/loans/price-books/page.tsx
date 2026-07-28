@@ -74,10 +74,10 @@ export default function PriceBooksPage() {
     : 0;
 
   // Count by commodity
-  const commodityCounts = rawPriceBooks.reduce((acc, pb) => {
+  const commodityCounts = rawPriceBooks.reduce((acc: Record<string, number>, pb: { commodity: string }) => {
     acc[pb.commodity] = (acc[pb.commodity] || 0) + 1;
     return acc;
-  }, {} as Record<CommodityType, number>);
+  }, {} as Record<string, number>);
 
   const kpis = [
     {

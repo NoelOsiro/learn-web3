@@ -160,7 +160,7 @@ export default function ValuationsPage() {
       accent: 'hsl(var(--agri-harvest))',
       icon: <TrendingUp className="h-4 w-4" />,
     },
-  ];
+  ].filter((kpi) => kpi !== null);
 
   const handleViewBreakdown = (valuation: any) => {
     setSelectedValuation(valuation);
