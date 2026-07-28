@@ -1,4 +1,4 @@
-import { CollectionStatus, Prisma, prisma, type CommodityGrade, type CommodityType, type MeasurementUnit } from '@cashflow/database';
+import { CollectionStatus, Prisma, prisma, CommodityGrade, CommodityType, MeasurementUnit } from '@cashflow/database';
 import { decimalSchema, paginationSchema, uuidSchema } from '@cashflow/shared';
 import { z } from 'zod';
 import crypto from 'crypto';
