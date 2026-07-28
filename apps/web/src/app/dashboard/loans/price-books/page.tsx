@@ -67,14 +67,14 @@ export default function PriceBooksPage() {
 
   // Average price per unit across all lines
   const allPrices = rawPriceBooks.flatMap((pb) =>
-    pb.lines.map((line: { pricePerUnit: string }) => Number(line.pricePerUnit))
+    pb.lines.map((line: any) => Number(line.pricePerUnit))
   );
   const avgPrice = allPrices.length > 0
     ? allPrices.reduce((acc: number, price: number) => acc + price, 0) / allPrices.length
     : 0;
 
   // Count by commodity
-  const commodityCounts = rawPriceBooks.reduce((acc: Record<string, number>, pb: { commodity: string }) => {
+  const commodityCounts = rawPriceBooks.reduce((acc: Record<string, number>, pb: any) => {
     acc[pb.commodity] = (acc[pb.commodity] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);

@@ -53,7 +53,7 @@ export default function LoansPage() {
 
     // Sum all processed repayments
     const totalRepaid = credit.repayments.reduce(
-      (acc: number, r: { amount: string }) => acc + Number(r.amount),
+      (acc: number, r: any) => acc + Number(r.amount),
       0
     );
 
@@ -95,13 +95,13 @@ export default function LoansPage() {
   // Dynamic Metrics Aggregations
   const activeLoans = loans.filter((l) => l.status === 'ACTIVE');
   const activePortfolioTotal = activeLoans.reduce(
-    (acc: number, l: { outstandingBalance: number }) => acc + l.outstandingBalance,
+    (acc: number, l: any) => acc + l.outstandingBalance,
     0
   );
 
   const totalDisbursedYTD = rawCredits
     .filter((c) => new Date(c.startDate) >= startOfYear)
-    .reduce((acc: number, c: { amount: string }) => acc + Number(c.amount), 0);
+    .reduce((acc: number, c: any) => acc + Number(c.amount), 0);
 
   const defaultedCount = loans.filter((l) => l.status === 'DEFAULTED').length;
   const par30Ratio =

@@ -68,8 +68,8 @@ export default async function WalletsPage({ searchParams }: PageProps) {
     });
 
   // Calculate KPI metrics from wallet data
-  const totalLedgerValue = wallets.reduce((acc: number, w: { availableBalance: number }) => acc + w.availableBalance, 0);
-  const pendingReserve = wallets.reduce((acc: number, w: { pendingBalance: number }) => acc + w.pendingBalance, 0);
+  const totalLedgerValue = wallets.reduce((acc: number, w: any) => acc + w.availableBalance, 0);
+  const pendingReserve = wallets.reduce((acc: number, w: any) => acc + w.pendingBalance, 0);
   const activeWallets = wallets.length;
   const flaggedCount = wallets.filter((w) => w.status === 'FLAGGED').length;
 
