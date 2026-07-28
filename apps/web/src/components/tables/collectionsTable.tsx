@@ -196,7 +196,7 @@ export default function CollectionsTable({ collections }: Iprops) {
                         {collections.length === 0 ? (
                             renderNoCollections
                         ) : (
-                            collections.map((col, idx) => {
+                            collections.map((col: Collection, idx: number) => {
                                 const meta = getCommodityMeta(col.commodity);
                                 return (
                                     <tr
