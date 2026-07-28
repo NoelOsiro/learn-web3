@@ -70,9 +70,9 @@ export default async function CollectionsPage({ searchParams }: PageProps) {
     deletedAt: item.deletedAt ? item.deletedAt.toISOString() : null,
   }));
 
-  const totalVolume = collections.reduce((a, c) => a + c.quantity, 0);
-  const totalGrossValue = collections.reduce((a, c) => a + c.grossAmount, 0);
-  const totalNetValue = collections.reduce((a, c) => a + c.netAmount, 0);
+  const totalVolume = collections.reduce((a: number, c: { quantity: number }) => a + c.quantity, 0);
+  const totalGrossValue = collections.reduce((a: number, c: { grossAmount: number }) => a + c.grossAmount, 0);
+  const totalNetValue = collections.reduce((a: number, c: { netAmount: number }) => a + c.netAmount, 0);
   const verifiedCount = collections.filter(
     (c) => c.status === CollectionStatus.VALUATED
   ).length;

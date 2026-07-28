@@ -42,7 +42,13 @@ export default async function DashboardPage() {
     },
   ];
 
-  const kpis = stats.map((stat, index) => ({ label: stat.name, value: String(stat.value), sub: ['Registered cooperative members', 'Produce batches recorded', 'Credit facilities in repayment', 'Available across farmer wallets'][index], icon: stat.icon, accent: ['#16a34a', '#0ea5e9', '#f59e0b', '#7c3aed'][index] }));
+  const kpis = stats.map((stat: any, index: number) => ({
+    label: stat.name,
+    value: String(stat.value),
+    sub: ['Registered cooperative members', 'Produce batches recorded', 'Credit facilities in repayment', 'Available across farmer wallets'][index],
+    icon: stat.icon,
+    accent: ['#16a34a', '#0ea5e9', '#f59e0b', '#7c3aed'][index]
+  }));
   const { data: recentCollections } = await listCollections(user.tenantId, { limit: 5 });
 
   return <div className="mx-auto max-w-screen-2xl space-y-8">
