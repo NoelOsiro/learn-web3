@@ -1,5 +1,6 @@
+import { PageHeader } from '@cashflow/ui';
 import { Bell, Building2, Check, Globe2, ShieldCheck, SlidersHorizontal } from 'lucide-react';
-import { PageHeader } from '@/components/dashboard/PageHeadr';
+
 
 const settings = [
   { icon: Building2, title: 'Cooperative profile', description: 'Branding, legal details, collection centers and contact information.', action: 'Edit profile' },

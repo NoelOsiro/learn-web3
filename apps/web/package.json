@@ -12,6 +12,9 @@
   "dependencies": {
     "@cashflow/auth": "*",
     "@cashflow/database": "*",
+    "@cashflow/collections": "*",
+    "@cashflow/farmers": "*",
+    "@cashflow/credit": "*",
     "@cashflow/inngest": "*",
     "@cashflow/shared": "*",
     "@cashflow/ui": "*",
