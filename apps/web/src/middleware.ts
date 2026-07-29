@@ -10,7 +10,6 @@ export async function middleware(request: NextRequest) {
   if (publicRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.next();
   }
-
   // 2. Initialize base response
   let response = NextResponse.next({ request });
 

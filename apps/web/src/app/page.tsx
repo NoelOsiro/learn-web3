@@ -9,7 +9,7 @@ export default function Home() {
         <div className="mt-8 p-6 border rounded-lg">
           <h2 className="text-2xl font-semibold mb-2">Getting Started</h2>
           <p className="text-muted-foreground">
-            Your production-ready MVP foundation is set up. Configure your environment variables to connect to Supabase.
+            Your production-ready MVP foundations is set up. Configure your environment variables to connect to Supabase.
           </p>
         </div>
       </div>
