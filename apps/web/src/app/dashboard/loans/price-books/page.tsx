@@ -54,19 +54,28 @@ export default function PriceBooksPage() {
 
   const rawPriceBooks = priceBooksData?.data || [];
 
+  // Transform Prisma types to match PriceBookDataTable interface
+  const transformedPriceBooks = rawPriceBooks.map((pb: any) => ({
+    ...pb,
+    validFrom: pb.validFrom instanceof Date ? pb.validFrom.toISOString() : pb.validFrom,
+    validTo: pb.validTo instanceof Date ? pb.validTo.toISOString() : pb.validTo,
+    createdAt: pb.createdAt instanceof Date ? pb.createdAt.toISOString() : pb.createdAt,
+    updatedAt: pb.updatedAt instanceof Date ? pb.updatedAt.toISOString() : pb.updatedAt,
+  }));
+
   // Calculate metrics
-  const activePriceBooks = rawPriceBooks.filter((pb) => {
+  const activePriceBooks = transformedPriceBooks.filter((pb) => {
     const now = new Date();
     const validFrom = new Date(pb.validFrom);
     const validTo = pb.validTo ? new Date(pb.validTo) : null;
     return validFrom <= now && (!validTo || validTo >= now);
   });
 
-  const defaultPriceBooks = rawPriceBooks.filter((pb) => pb.isDefault);
-  const totalLines = rawPriceBooks.reduce((acc, pb) => acc + pb.lines.length, 0);
+  const defaultPriceBooks = transformedPriceBooks.filter((pb) => pb.isDefault);
+  const totalLines = transformedPriceBooks.reduce((acc, pb) => acc + pb.lines.length, 0);
 
   // Average price per unit across all lines
-  const allPrices = rawPriceBooks.flatMap((pb) =>
+  const allPrices = transformedPriceBooks.flatMap((pb) =>
     pb.lines.map((line: any) => Number(line.pricePerUnit))
   );
   const avgPrice = allPrices.length > 0
@@ -74,7 +83,7 @@ export default function PriceBooksPage() {
     : 0;
 
   // Count by commodity
-  const commodityCounts = rawPriceBooks.reduce((acc: Record<string, number>, pb: any) => {
+  const commodityCounts = transformedPriceBooks.reduce((acc: Record<string, number>, pb: any) => {
     acc[pb.commodity] = (acc[pb.commodity] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
@@ -204,8 +213,8 @@ export default function PriceBooksPage() {
           ))}
         </div>
       ) : (
-        <PriceBookDataTable 
-          pricebooks={rawPriceBooks}
+        <PriceBookDataTable
+          pricebooks={transformedPriceBooks}
           onViewLines={handleViewLines}
           onEdit={handleEdit}
           onSetDefault={handleSetDefault}
