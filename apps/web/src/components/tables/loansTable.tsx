@@ -1,4 +1,4 @@
-import { CreditStatus } from "@cashflow/database";
+import { CreditStatus } from "@prisma/client";
 import { Calendar, FileText, CheckCircle2, Clock, AlertTriangle } from "lucide-react";
 import { TableShell } from '@cashflow/ui';
 
