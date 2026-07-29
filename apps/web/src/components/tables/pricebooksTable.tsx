@@ -12,15 +12,15 @@ interface PriceBookLine {
 
 interface PriceBook {
   id: string;
+  createdAt: string;
+  updatedAt: string;
+  tenantId: string;
   name: string;
+  deletedAt: string | null;
   commodity: CommodityType;
   isDefault: boolean;
-  validFrom: Date;
-  validTo: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
-  tenantId: string;
+  validFrom: string;
+  validTo: string | null;
   lines: PriceBookLine[];
 }
 
@@ -129,7 +129,7 @@ export default function PriceBookDataTable(props: PriceBooksDataTableProps) {
                   {getStatusBadge(priceBook)}
                 </div>
               </td>
-              
+
               <td className="px-6 py-4">
                 <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold border ${getCommodityBadgeColor(priceBook.commodity)}`}>
                   {priceBook.commodity}
@@ -166,7 +166,7 @@ export default function PriceBookDataTable(props: PriceBooksDataTableProps) {
 
               <td className="px-6 py-4 text-right">
                 <div className="relative inline-block">
-                  <button 
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       const dropdown = e.currentTarget.nextElementSibling as HTMLElement;
