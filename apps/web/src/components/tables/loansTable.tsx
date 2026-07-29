@@ -1,4 +1,4 @@
-import { CreditStatus } from "@prisma/client";
+import { CreditStatus } from "@cashflow/database";
 import { Calendar, FileText, CheckCircle2, Clock, AlertTriangle } from "lucide-react";
 import { TableShell } from '@cashflow/ui';
 
@@ -52,6 +52,12 @@ function LoanStatusBadge({ status }: { status: CreditStatus }) {
         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200">
           <CheckCircle2 className="h-3 w-3" />
           Fully Paid
+        </span>
+      );
+    default:
+      return (
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800 border border-gray-200">
+          {status}
         </span>
       );
   }

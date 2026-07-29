@@ -28,7 +28,8 @@
       "cache": false
     },
     "db:generate": {
-      "cache": false
+      "cache": false,
+      "outputs": ["generated/**"]
     },
     "db:push": {
       "cache": false
