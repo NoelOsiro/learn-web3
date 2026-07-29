@@ -18,6 +18,7 @@
     "@cashflow/inngest": "*",
     "@cashflow/shared": "*",
     "@cashflow/ui": "*",
+    "@prisma/client": "^6.1.0",
     "@hookform/resolvers": "^3.10.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.49.1",
