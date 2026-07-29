@@ -1,13 +1,14 @@
 import { router, protectedProcedure } from '../server';
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
+import type { Collection } from '@cashflow/database';
 
 const commodityEnum = z.enum(['MILK', 'MAIZE', 'COFFEE', 'AVOCADO', 'MACADAMIA', 'TEA']);
 const gradeEnum = z.enum(['GRADE_A', 'GRADE_B', 'GRADE_C', 'PREMIUM', 'STANDARD', 'REJECT']);
 const unitEnum = z.enum(['KG', 'LITRE', 'TONNE', 'BAG', 'CRATE', 'UNIT']);
 
 export const collectionsRouter = router({
-  list: protectedProcedure.query(async ({ ctx }) => {
+  list: protectedProcedure.query(async ({ ctx }): Promise<Collection[]> => {
     if (!ctx.tenantId) {
       throw new TRPCError({
         code: 'UNAUTHORIZED',
