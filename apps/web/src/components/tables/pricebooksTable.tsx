@@ -1,11 +1,11 @@
-import { CommodityType } from "@cashflow/database";
+import { CommodityType, CommodityGrade, MeasurementUnit } from "@cashflow/database";
 import { Calendar, FileText, Star, Clock, CheckCircle2, AlertCircle, MoreVertical, Copy, Trash2 } from "lucide-react";
 import { TableShell } from '@cashflow/ui';
 
 interface PriceBookLine {
   id: string;
-  grade: string;
-  unit: string;
+  grade: CommodityGrade;
+  unit: MeasurementUnit;
   pricePerUnit: { toString: () => string };
   currency: string;
 }
@@ -15,10 +15,13 @@ interface PriceBook {
   name: string;
   commodity: CommodityType;
   isDefault: boolean;
-  validFrom: string | Date;
-  validTo: string | Date | null;
+  validFrom: Date;
+  validTo: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
+  tenantId: string;
   lines: PriceBookLine[];
-  createdAt: string | Date;
 }
 
 interface PriceBooksDataTableProps {
@@ -110,7 +113,7 @@ export default function PriceBookDataTable(props: PriceBooksDataTableProps) {
                 No price books recorded yet.
               </td>
             </tr>
-          ) : props.pricebooks.map(priceBook => (
+          ) : props.pricebooks.map((priceBook: PriceBook) => (
             <tr key={priceBook.id} className="hover:bg-muted/40 transition-colors">
               <td className="px-6 py-4">
                 <div className="space-y-1.5">
@@ -135,7 +138,7 @@ export default function PriceBookDataTable(props: PriceBooksDataTableProps) {
 
               <td className="px-6 py-4">
                 <div className="space-y-1">
-                  {priceBook.lines.slice(0, 3).map((line, idx) => (
+                  {priceBook.lines.slice(0, 3).map((line: PriceBookLine, idx: number) => (
                     <div key={idx} className="text-xs text-muted-foreground">
                       <span className="font-medium text-foreground">{line.grade}</span>
                       <span className="mx-1">({line.unit})</span>
