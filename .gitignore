@@ -56,3 +56,4 @@ prisma/migrations
 
 # OS
 Thumbs.db
+packages/database/generated/
