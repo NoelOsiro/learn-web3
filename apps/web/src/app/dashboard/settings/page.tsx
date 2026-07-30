@@ -145,7 +145,6 @@ function SettingsCard({ icon: Icon, title, description, action, priority }: Sett
 
 export default function SettingsPage() {
   const [notifications, setNotifications] = useState<NotificationSetting[]>(defaultNotifications);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggle = (id: string) => {
     setNotifications(prev =>
@@ -154,24 +153,6 @@ export default function SettingsPage() {
       )
     );
   };
-
-  if (isLoading) {
-    return (
-      <div className="max-w-screen-2xl mx-auto px-6 py-8">
-        <PageHeader
-          subtitle="Platform controls"
-          title="Workspace settings"
-          description="Set up how your cooperative captures, approves, and pays for produce."
-        />
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent" />
-            <p className="mt-4 text-sm text-muted-foreground">Loading settings...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-screen-2xl mx-auto px-6 py-8 space-y-8">
