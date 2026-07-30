@@ -7,14 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rm -rf .next node_modules"
+    "clean": "rm -rf .next node_modules",
+    "postinstall": "mkdir -p generated/prisma && cp -r ../../packages/database/generated/prisma/*.so.node generated/prisma/ 2>/dev/null || true"
   },
   "dependencies": {
     "@cashflow/auth": "*",
-    "@cashflow/database": "*",
     "@cashflow/collections": "*",
-    "@cashflow/farmers": "*",
     "@cashflow/credit": "*",
+    "@cashflow/database": "*",
+    "@cashflow/farmers": "*",
     "@cashflow/inngest": "*",
     "@cashflow/shared": "*",
     "@cashflow/ui": "*",
@@ -36,6 +37,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@prisma/nextjs-monorepo-workaround-plugin": "^7.9.1",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.6",
     "@types/react-dom": "^19.0.2",
